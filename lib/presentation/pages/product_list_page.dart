@@ -6,17 +6,13 @@ class ProductListPage extends StatefulWidget {
 }
 
 class _ProductListPageState extends State<ProductListPage> {
-  final List<Map<String, String>> products = [
-    {'name': 'Producto 1', 'description': 'Descripción de Producto 1'},
-    {'name': 'Producto 2', 'description': 'Descripción de Producto 2'},
-    {'name': 'Producto 3', 'description': 'Descripción de Producto 3'},
-  ];
+  final List<Map<String, String>> products = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de Productos'),
+        title: Text('Ingresar Productos'),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
