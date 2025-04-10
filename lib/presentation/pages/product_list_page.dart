@@ -1,49 +1,45 @@
 import 'package:flutter/material.dart';
 
-class ProductListPage extends StatefulWidget {
-  @override
-  _ProductListPageState createState() => _ProductListPageState();
-}
-
-class _ProductListPageState extends State<ProductListPage> {
-  final List<Map<String, String>> products = [];
+// Clase que define una página de lista de productos, la cual es un StatelessWidget (sin estado mutable).
+class ProductListPage extends StatelessWidget {
+  const ProductListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Lista de productos, representados como cadenas de texto.
+    final products = [
+      'Smartphone Ultra Pro',
+      'Laptop Gaming X5',
+      'Tablet Premium 12',
+    ];
+
     return Scaffold(
+      // Contenedor base que define la estructura visual de la página.
       appBar: AppBar(
-        title: Text('Ingresar Productos'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () async {
-              final newProduct = await Navigator.pushNamed(
-                context,
-                '/crearProducto',
-              );
-              if (newProduct != null) {
-                setState(() {
-                  products.add(newProduct as Map<String, String>);
-                });
-              }
-            },
-          ),
-        ],
+        // Barra superior con el título de la página.
+        title: const Text('Lista de Productos'),
       ),
-      body: ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(products[index]['name']!),
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/productDetail',
-                arguments: products[index],
-              );
-            },
-          );
-        },
+      body: ListView(
+        // Genera una lista desplazable con elementos.
+        children:
+            products
+                .map(
+                  // Mapea cada producto para crear un widget tipo ListTile (elemento de lista).
+                  (product) => ListTile(
+                    // Muestra el nombre del producto como título.
+                    title: Text(product),
+                    // Define una acción al tocar el elemento de la lista.
+                    onTap: () {
+                      // Navega a la página de detalles del producto, pasando el producto como argumento.
+                      Navigator.pushNamed(
+                        context,
+                        '/productDetail',
+                        arguments: product,
+                      );
+                    },
+                  ),
+                )
+                .toList(), // Convierte los widgets generados en una lista para el ListView.
       ),
     );
   }
